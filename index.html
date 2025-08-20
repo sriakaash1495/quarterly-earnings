@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quarterly Earnings — Interactive RevealJS Deck</title>
+
+    <!-- RevealJS core & theme (CDN) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/white.css" id="theme">
+
+    <!-- Code highlight styles (built-in) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/highlight/monokai.css">
+
+    <!-- KaTeX for math -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+
+    <style>
+      /* Simple brand polish */
+      .title-accent { font-weight: 700; letter-spacing: .01em; }
+      .email-pill { font-size: .6em; background:#f2f2f2; padding:.35em .6em; border-radius:999px; display:inline-block; }
+      .kpi { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1.25rem; }
+      .kpi .card { border-radius: 1rem; box-shadow: 0 10px 25px rgba(0,0,0,.06); padding: 1.25rem; }
+      .r-stretch img { object-fit: contain; }
+      /* Print/PDF tweaks */
+      @media print { .reveal { font-size: 22px; } }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <!-- TITLE -->
+        <section>
+          <h2 class="title-accent">Q2 Earnings Report</h2>
+          <p>Interactive presentation powered by <strong>RevealJS</strong></p>
+          <p class="email-pill">Contact: <strong>22f2000675@ds.study.iitm.ac.in</strong></p>
+          <aside class="notes">
+            Welcome! This deck demonstrates modern capabilities for a financial stakeholder meeting:
+            markdown slides, fragments, syntax-highlighted code, math, and speaker notes.
+          </aside>
+        </section>
+
+        <!-- KPI SNAPSHOT with fragments -->
+        <section>
+          <h3>Snapshot — Key Metrics</h3>
+          <div class="kpi">
+            <div class="card fragment"><h4>Revenue</h4><p>$1.24B ▲ 7.8% YoY</p></div>
+            <div class="card fragment"><h4>Operating Margin</h4><p>19.2% ▲ 120 bps</p></div>
+            <div class="card fragment fade-up"><h4>EPS (Diluted)</h4><p>$2.31 ▲ 11% YoY</p></div>
+          </div>
+          <aside class="notes">
+            Reveal fragments let us stage content reveal for emphasis. Use arrow keys to advance items.
+          </aside>
+        </section>
+
+        <!-- MARKDOWN SLIDE (require Markdown plugin) -->
+        <section data-markdown>
+          <textarea data-template>
+## Guidance Highlights (Markdown)
+
+- **FY Outlook** maintained; revenue growth *6–8%*.
+- Share repurchases continue (authorized: $5B).
+- Cloud migration driving **OPEX efficiencies**.
+
+---
+
+## Segment Mix
+
+1. Banking Platforms — 46%
+2. Capital Markets — 32%
+3. Payments — 22%
+
+> Notes: This entire slide is rendered from Markdown.
+          </textarea>
+          <aside class="notes">This demonstrates native Markdown authoring inside the deck.</aside>
+        </section>
+
+        <!-- CODE with syntax highlighting & line focus -->
+        <section>
+          <h3>Stress Test — VaR Monte Carlo (Python)</h3>
+          <pre><code class="language-python" data-line-numbers="1-4|6-10|12-17">
+import numpy as np
+np.random.seed(42)
+
+# Simulated daily returns (mean, std)
+mu, sigma = 0.0005, 0.012
+n = 252
+
+# Portfolio P&L simulation
+sim = np.random.normal(mu, sigma, (10000, n)).sum(axis=1)
+pl = 1_000_000 * sim
+
+# 99% Value at Risk (VaR)
+var_99 = -np.percentile(pl, 1)
+print(f"99% VaR: ${var_99:,.0f}")
+          </code></pre>
+          <aside class="notes">Code blocks are highlighted and can spotlight lines during narration.</aside>
+        </section>
+
+        <!-- MATH (KaTeX/MathJax) -->
+        <section>
+          <h3>Financial Formulas</h3>
+          <p>CAPM: \[\mathbb{E}[R_i] = R_f + \beta_i\big(\mathbb{E}[R_m]-R_f\big)\]</p>
+          <p>WACC: \[\text{WACC} = \tfrac{E}{V}R_e + \tfrac{D}{V}R_d(1-T_c)\]</p>
+          <aside class="notes">Equations render crisply with KaTeX. Use them for valuation or risk methodology.</aside>
+        </section>
+
+        <!-- ANIMATED BUILD / STACK -->
+        <section>
+          <h3>Revenue Bridge</h3>
+          <div class="r-stack">
+            <img class="fragment" data-src="https://dummyimage.com/1280x480/edf2f7/111&text=Base+Revenue:+$1.15B" alt="Base" />
+            <img class="fragment" data-src="https://dummyimage.com/1280x480/e6fffa/111&text=+FX+:++$20M" alt="FX" />
+            <img class="fragment" data-src="https://dummyimage.com/1280x480/ffe4e6/111&text=+Price/Mix:+$35M" alt="Price Mix" />
+            <img class="fragment" data-src="https://dummyimage.com/1280x480/e9d5ff/111&text=+Volume:+$35M" alt="Volume" />
+            <img class="fragment" data-src="https://dummyimage.com/1280x480/d1fae5/111&text=Q2+Revenue:+$1.24B" alt="Q2" />
+          </div>
+          <aside class="notes">Each image appears as you advance, illustrating the bridge components.</aside>
+        </section>
+
+        <!-- SPEAKER NOTES EXAMPLE -->
+        <section>
+          <h3>Risk & Controls</h3>
+          <ul>
+            <li class="fragment">Liquidity coverage above policy threshold</li>
+            <li class="fragment">Counterparty concentration trending down</li>
+            <li class="fragment">Cyber controls improved MTTR by 18%</li>
+          </ul>
+          <aside class="notes">
+            Call out improvements to KRIs/KCIs and tie them back to audit findings from last quarter.
+          </aside>
+        </section>
+
+        <!-- DEPLOY HELP -->
+        <section>
+          <h3>Publish on GitHub Pages</h3>
+          <ol>
+            <li>Create a public repo, e.g. <code>quarterly-earnings-revealjs</code>.</li>
+            <li>Add this <code>index.html</code> at repo root. Commit & push.</li>
+            <li>Settings → Pages → Build & deployment → Deploy from branch → <em>main</em>, folder <em>/ (root)</em>.</li>
+            <li>Your URL will be: <code>https://&lt;YOUR-USER&gt;.github.io/quarterly-earnings-revealjs/</code></li>
+            <li>Force refresh cached content by appending <code>?v=1</code>, <code>?v=2</code>, etc.</li>
+          </ol>
+          <p class="email-pill">Owner: 22f2000675@ds.study.iitm.ac.in</p>
+          <aside class="notes">If you change the repo name, the URL path changes accordingly.</aside>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- Reveal scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/markdown/markdown.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/math/math.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        width: 1280,
+        height: 720,
+        margin: 0.04,
+        controls: true,
+        progress: true,
+        history: true,
+        transition: 'slide',
+        plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ],
+        math: {
+          // KaTeX auto-loaded from CDN by the plugin
+          // You can switch to MathJax by configuring here
+        }
+      });
+    </script>
+  </body>
+</html>
